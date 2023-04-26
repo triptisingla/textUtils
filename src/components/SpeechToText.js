@@ -1,7 +1,7 @@
 import React from 'react'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
-export default function SpeechToText() {
+export default function SpeechToText(props) {
     // const [t, setT] = useState('d')
     const {
         transcript,
@@ -14,23 +14,18 @@ export default function SpeechToText() {
         return <span>Browser doesn't support speech recognition.</span>;
     }
 
-    // const handleTChange=(ev)=>{
-    //     setT(ev.target.value)
-        
-    // }
     
     return (
         <>
-            <div className='container my-4'>
-                <label htmlFor="InputText"></label>
-                {/* <input type="text" id='InputText' value={t} onChange={handleTChange}/> */}
+            <div className='container my-4' style={{backgroundColor:props.mode==='dark'?'rgb(32 43 53)':'white',color: props.mode==='light'?'black':'white'}}>
+                <label htmlFor="InputText"  style={{backgroundColor:props.mode==='dark'?'rgb(32 43 53)':'white',color: props.mode==='light'?'black':'white'}}></label>
                 <p>Microphone: {listening ? 'on' : 'off'}</p>
                 <button className='btn btn-secondary mx-1' onClick={SpeechRecognition.startListening}>Start</button>
                 <button className='btn btn-secondary mx-1' onClick={SpeechRecognition.stopListening}>Stop</button>
                 <button className='btn btn-secondary mx-1' onClick={resetTranscript}>Reset</button>
             </div>
-            {/* <input type="text" value={transcript} onChange={handleTransChange}/> */}
-            <p>{transcript}</p>
+            
+            <textarea className={`form-control mb-3`} style={{backgroundColor:props.mode==='dark'?'rgb(32 43 53)':'white',color: props.mode==='light'?'black':'white'}} rows={10} type="text" value={transcript} />
         </>
     )
 }
